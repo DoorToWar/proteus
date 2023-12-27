@@ -84,6 +84,9 @@ def graphics():
 
 
 def main():
+    '''
+    Вызывает функции linear_regression и graphics
+    '''
     linear_regression()
     graphics()
 

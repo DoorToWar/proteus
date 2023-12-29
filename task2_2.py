@@ -40,11 +40,21 @@ def polynomial_regression(path_to_file='time_messagees.txt'):
 
     # Т.к. в столбце Amount of messages хранится количество сообщений, что не может быть не целочисленными значением,
     # эти данные приводятся к типу int
+    
     dataframe['Amount of messages'] = dataframe['Amount of messages'].astype(int)
 
     # то же самое действие производится с столбцом Time
     dataframe['Time'] = dataframe['Time'].astype(int)
-
+    
+    
+    '''
+    std = dataframe['Amount of messages'].std()
+    iqr = dataframe['Amount of messages'].quantile(0.75) - dataframe['Amount of messages'].quantile(0.25)
+    mean =  dataframe['Amount of messages'].mean()
+    # Определите аномалии на основе статистических метрик
+    dataframe = dataframe[dataframe['Amount of messages'] <= (mean + (3 * std))]
+    '''
+    #print(anomalies)
     dataframe.info() # Проверка смены типа данных
 
     # Создаётся модель полиномиальной регрессии

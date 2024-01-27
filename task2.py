@@ -8,9 +8,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
 
-global x_scaled,y_scaled,X_valid,predicted_values 
-
-
 def linear_regression(path_to_file = 'time_messagees.txt'):
     '''
     Построение модели линейной регрессии
@@ -22,8 +19,46 @@ def linear_regression(path_to_file = 'time_messagees.txt'):
         другой функции
     '''
 
-    global x_scaled,y_scaled,X_valid,predicted_values 
+    dataframe = dataframe_prep(path_to_file)
 
+    # данные стандартизируются
+    scaler = MinMaxScaler()
+    x_scaled = scaler.fit_transform(np.array( dataframe['Time']).reshape(-1,1))
+    y_scaled = scaler.fit_transform(np.array(dataframe['Amount of messages']).reshape(-1, 1))
+
+    # создаются тренировочные и валидационные выборки
+    X_train, X_valid, y_train, y_valid = train_test_split(x_scaled,y_scaled,test_size = 0.25, random_state = 0)
+
+    predicted_values = model_stud(X_train,X_valid,y_train)
+
+    graphics(X_valid,x_scaled,y_scaled,predicted_values)
+
+    # вывод mse 
+    print("mean_squared_error is ",mean_squared_error(y_valid, predicted_values))
+
+def graphics(X_valid,x_scaled,y_scaled,predicted_values):
+    '''
+    Построение графиков
+
+    Используется библиотека matplotlib
+    '''
+
+    # Построение графика
+    plt.plot(X_valid, predicted_values, label='Модель линейной регрессии', color = 'r')
+    plt.scatter(x_scaled, y_scaled, color='b', label='Данные', s = 1)
+    plt.xlabel('Время') # подписывается ось x
+    plt.ylabel('Целевые переменные (стандартизованные)') # подписывается ось y
+    plt.legend()
+    plt.grid()
+    plt.show()
+
+def dataframe_prep(path_to_file):
+    '''
+    Создание датафрейма
+
+    Используется библиотека pandas, datetime
+
+    '''
     # Считывается файл
     dataframe = pd.read_csv(path_to_file, delimiter=',', header = None, names = ['Time','Amount of messages'])
 
@@ -45,16 +80,16 @@ def linear_regression(path_to_file = 'time_messagees.txt'):
 
     dataframe.info() # Проверка смены типа данных
 
+    return(dataframe)
+
+def model_stud(X_train,X_valid,y_train):
+    '''
+    Создание и обучение модели линейной регрессии
+
+    Используется библиотека sklearn
+    '''
     # Создаётся модель линейной регрессии
     model_linear_regression = LinearRegression()
-
-    # данные стандартизируются
-    scaler = MinMaxScaler()
-    x_scaled = scaler.fit_transform(np.array( dataframe['Time']).reshape(-1,1))
-    y_scaled = scaler.fit_transform(np.array(dataframe['Amount of messages']).reshape(-1, 1))
-
-    # создаются тренировочные и валидационные выборки
-    X_train, X_valid, y_train, y_valid = train_test_split(x_scaled,y_scaled,test_size = 0.25, random_state = 0)
 
     # обучается модель
     model_linear_regression = LinearRegression()
@@ -62,33 +97,13 @@ def linear_regression(path_to_file = 'time_messagees.txt'):
 
     # предсказываются значения
     predicted_values = model_linear_regression.predict(X_valid)
-
-    # вывод mse 
-    print("mean_squared_error is ",mean_squared_error(y_valid, predicted_values))
-
-def graphics():
-    '''
-    Построение графиков
-
-    Используется библиотека matplotlib
-    '''
-
-    # Построение графика
-    plt.plot(X_valid, predicted_values, label='Модель линейной регрессии', color = 'r')
-    plt.scatter(x_scaled, y_scaled, color='b', label='Данные', s = 1)
-    plt.xlabel('Время') # подписывается ось x
-    plt.ylabel('Целевые переменные (стандартизованные)') # подписывается ось y
-    plt.legend()
-    plt.grid()
-    plt.show()
-
+    return (predicted_values)
 
 def main():
-    '''
-    Вызывает функции linear_regression и graphics
-    '''
-    linear_regression()
-    graphics()
+    path_to_file = 'time_messagees.txt'
+    linear_regression(path_to_file)
 
-main()
+if __name__ == '__main__':
+    main()
+
 

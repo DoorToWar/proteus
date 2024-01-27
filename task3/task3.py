@@ -1,6 +1,5 @@
 import cv2 
 
-
 def show_image(image, text):
     '''
     Выводит изображение
@@ -20,6 +19,11 @@ def print_info(image):
     print("Количество каналов: ", image.shape[2])
 
 def rotate(image, degree):
+    '''
+    Поворачивает изображение
+    
+    Позиционные аргументы: ссылка на изображение и число - кол-во градусов, на которое нужно будет повернуть изображение
+    '''
     # получаем размер и изображения
     (h,w) = image.shape[:2]
     # находим центр
@@ -30,14 +34,15 @@ def rotate(image, degree):
     # применяется матрица поворота к изображению
     rotated_image = cv2.warpAffine(image,M,(w,h))
     show_image(rotated_image, str(degree))
-raw_image = cv2.imread(r"C:\GOG Games\proteus\task 2\proteus\proteus\task3\data\images\pcb.jpg", cv2.IMREAD_COLOR) # IMREAD_COLOR обеспечивает вывод изображения в цвете
+
 
 def main():
-
+    raw_image = cv2.imread(r"C:\GOG Games\proteus\task 2\proteus\proteus\task3\data\images\pcb.jpg", cv2.IMREAD_COLOR) # IMREAD_COLOR обеспечивает вывод изображения в цвете
     show_image(raw_image, "raw")
 
     print_info(raw_image)
 
+    # изменение разрешения изображения
     resized_raw_image = cv2.resize(raw_image,(1920, 1080))
     print("Разрешение: ", resized_raw_image.shape[1], "x", resized_raw_image.shape[0])
     show_image(resized_raw_image, "resized raw")

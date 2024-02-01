@@ -140,7 +140,7 @@ def main():
     sobelx = cv2.Sobel(raw_image, cv2.CV_64F, 1, 0, ksize=5)
     sobely = cv2.Sobel(raw_image, cv2.CV_64F, 0, 1, ksize=5)
     combined_sobel = cv2.addWeighted(sobelx, 0.5, sobely, 0.5, 0)
-    show_image(combined_sobel, "combined_sobel")
+    show_image(combined_sobel, "sobel")
 
     # Фильтр Scharr
     scharrx = cv2.Scharr(raw_image, cv2.CV_64F, 1, 0)

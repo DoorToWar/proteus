@@ -198,12 +198,13 @@ import cv2
 
 * xyz
 
-![Uploading изображение.png…]()
+![изображение](https://github.com/DoorToWar/proteus/assets/117304018/782dda9c-e46e-4a5d-adf0-837b58d8ad67)
 
 
 * hsv
 
-![изображение](https://github.com/DoorToWar/proteus/assets/117304018/8aeb6577-145d-4d4d-ac0a-dc85e058e4db)
+![изображение](https://github.com/DoorToWar/proteus/assets/117304018/d9d9c408-55e5-44d7-b7a8-4c65de5054ad)
+
 
 * hls
 
@@ -229,7 +230,8 @@ import cv2
 
 * l
 
-![изображение](https://github.com/DoorToWar/proteus/assets/117304018/7f5f428f-0cac-49be-848e-a4911aea2907)
+![изображение](https://github.com/DoorToWar/proteus/assets/117304018/664d7168-a11a-4b2a-9c52-91130a57a682)
+
 
 * a
 

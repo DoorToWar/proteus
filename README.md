@@ -193,11 +193,13 @@ import cv2
 
 * rgb
 
-![изображение](https://github.com/DoorToWar/proteus/assets/117304018/0f72ebc4-62bd-426b-9d87-05256fffed2d)
+![изображение](https://github.com/DoorToWar/proteus/assets/117304018/ab8af557-b91b-42f1-9ef7-7b2c2dd127a3)
+
 
 * xyz
 
-![изображение](https://github.com/DoorToWar/proteus/assets/117304018/9e1dfcb2-62e0-4a52-a51e-36179442440a)
+![Uploading изображение.png…]()
+
 
 * hsv
 
